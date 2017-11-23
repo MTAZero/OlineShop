@@ -1,4 +1,4 @@
-namespace OnlineShop_Data.Model
+namespace OnlineShop_Data
 {
     using System;
     using System.Collections.Generic;
@@ -6,21 +6,23 @@ namespace OnlineShop_Data.Model
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("CHITIETHOADON")]
-    public partial class CHITIETHOADON
+    [Table("CHITIETGIOHANG")]
+    public partial class CHITIETGIOHANG
     {
         public int ID { get; set; }
 
-        public int? MATHANGID { get; set; }
-
-        public int? HOADONID { get; set; }
+        public int? SANPHAMID { get; set; }
 
         public int? SOLUONG { get; set; }
 
+        public int? DONGIA { get; set; }
+
         public int? THANHTIEN { get; set; }
 
-        public virtual HOADON HOADON { get; set; }
+        public int? KICHTHUOCID { get; set; }
 
-        public virtual MATHANG MATHANG { get; set; }
+        public virtual KICHTHUOC KICHTHUOC { get; set; }
+
+        public virtual SANPHAM SANPHAM { get; set; }
     }
 }

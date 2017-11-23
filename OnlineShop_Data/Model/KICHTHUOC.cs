@@ -1,4 +1,4 @@
-namespace OnlineShop_Data.Model
+namespace OnlineShop_Data
 {
     using System;
     using System.Collections.Generic;
@@ -6,30 +6,22 @@ namespace OnlineShop_Data.Model
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("KHACHHANG")]
-    public partial class KHACHHANG
+    [Table("KICHTHUOC")]
+    public partial class KICHTHUOC
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public KHACHHANG()
+        public KICHTHUOC()
         {
-            HOADONs = new HashSet<HOADON>();
+            CHITIETGIOHANGs = new HashSet<CHITIETGIOHANG>();
         }
 
         public int ID { get; set; }
 
-        public string HOTEN { get; set; }
+        public string TEN { get; set; }
 
-        public string DIACHI { get; set; }
-
-        public string SDT { get; set; }
-
-        public string TAIKHOAN { get; set; }
-
-        public string MATKHAUMD5 { get; set; }
-
-        public int? TRANGTHAI { get; set; }
+        public int? LOAI { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<HOADON> HOADONs { get; set; }
+        public virtual ICollection<CHITIETGIOHANG> CHITIETGIOHANGs { get; set; }
     }
 }

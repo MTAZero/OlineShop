@@ -1,5 +1,4 @@
 ﻿using OnlineShop_Data.Interface;
-using OnlineShop_Data.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,22 +7,22 @@ using System.Threading.Tasks;
 
 namespace OnlineShop_Data.Service
 {
-    class MatHangService : IService<MATHANG>
+    class SANPHAMService : IService<SANPHAM>
     {
         private OnlineShop_DbContext dataContext = new OnlineShop_DbContext();
 
-        public MATHANG Add(MATHANG entity, ref string err)
+        public SANPHAM Add(SANPHAM entity, ref string err)
         {
             try
             {
-                dataContext.MATHANGs.Add(entity);
+                dataContext.SANPHAMs.Add(entity);
                 dataContext.SaveChanges();
                 return entity;
             }
             catch (Exception ex)
             {
                 err = ex.Message;
-                return new MATHANG();
+                return new SANPHAM();
             }
         }
 
@@ -31,8 +30,8 @@ namespace OnlineShop_Data.Service
         {
             try
             {
-                MATHANG entity = dataContext.MATHANGs.Find(id);
-                dataContext.MATHANGs.Remove(entity);
+                SANPHAM entity = dataContext.SANPHAMs.Find(id);
+                dataContext.SANPHAMs.Remove(entity);
                 dataContext.SaveChanges();
                 return true;
             }
@@ -43,11 +42,11 @@ namespace OnlineShop_Data.Service
             }
         }
 
-        public bool Delete(MATHANG entity, ref string err)
+        public bool Delete(SANPHAM entity, ref string err)
         {
             try
             {
-                dataContext.MATHANGs.Remove(entity);
+                dataContext.SANPHAMs.Remove(entity);
                 dataContext.SaveChanges();
                 return true;    
             }
@@ -58,9 +57,9 @@ namespace OnlineShop_Data.Service
             }
         }
 
-        public MATHANG Find(int id, ref string err)
+        public SANPHAM Find(int id, ref string err)
         {
-            MATHANG entity = dataContext.MATHANGs.Find(id);
+            SANPHAM entity = dataContext.SANPHAMs.Find(id);
             if (entity == null)
             {
                 err = "Không tìm thấy";
@@ -70,9 +69,9 @@ namespace OnlineShop_Data.Service
             return entity;
         }
 
-        public IList<MATHANG> getAll()
+        public IList<SANPHAM> getAll()
         {
-            return dataContext.MATHANGs.ToList();
+            return dataContext.SANPHAMs.ToList();
         }
 
         public bool Save(ref string err)
@@ -89,16 +88,19 @@ namespace OnlineShop_Data.Service
             }
         }
 
-        public bool Update(MATHANG entity, ref string err)
+        public bool Update(SANPHAM entity, ref string err)
         {
             try
             {
-                MATHANG tgz = dataContext.MATHANGs.Find(entity.ID);
-                tgz.ANH = entity.ANH;
-                tgz.GIABAN = entity.GIABAN;
-                tgz.KHUYENMAI = entity.KHUYENMAI;
-                tgz.LOAI = entity.LOAI;
+                SANPHAM tgz = dataContext.SANPHAMs.Find(entity.ID);
+       
                 tgz.TEN = entity.TEN;
+                tgz.GIASANPHAM = entity.GIASANPHAM;
+                tgz.KHUYENMAI = entity.KHUYENMAI;
+                tgz.MOTA = entity.MOTA;
+                tgz.THONGTIN = entity.THONGTIN;
+                tgz.LOAISP = entity.LOAISP;
+                tgz.DOITUONG = entity.DOITUONG;
                 tgz.TRANGTHAI = entity.TRANGTHAI;
 
                 dataContext.SaveChanges();
