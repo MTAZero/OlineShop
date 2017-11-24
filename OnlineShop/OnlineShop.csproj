@@ -255,6 +255,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Admin\" />
+    <Folder Include="Content\Client\images\AnhSP\" />
+    <Folder Include="Content\Client\images\NguoiDung\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <PropertyGroup>
