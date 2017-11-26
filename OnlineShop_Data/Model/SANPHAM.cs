@@ -22,9 +22,9 @@ namespace OnlineShop_Data
 
         public string TEN { get; set; }
 
-        public int? GIASANPHAM { get; set; }
+        public double? GIASANPHAM { get; set; }
 
-        public int? KHUYENMAI { get; set; }
+        public double? KHUYENMAI { get; set; }
 
         public string MOTA { get; set; }
 

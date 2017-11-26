@@ -259,6 +259,12 @@
     <Folder Include="Content\Client\images\NguoiDung\" />
     <Folder Include="Models\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OnlineShop_Data\OnlineShop_Data.csproj">
+      <Project>{ba92fe80-fd42-4205-9d03-498e1d892aed}</Project>
+      <Name>OnlineShop_Data</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

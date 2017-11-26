@@ -1,4 +1,6 @@
-﻿using System;
+﻿using OnlineShop_Data;
+using OnlineShop_Data.Service;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,7 +13,10 @@ namespace OnlineShop.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            return View();
+            SANPHAMService sanpham = new SANPHAMService();
+            List<SANPHAM> list = (List<SANPHAM>) sanpham.getAll();
+
+            return View(list);
         }
     }
 }

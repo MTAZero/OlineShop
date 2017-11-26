@@ -51,7 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\ANHSP.cs" />
+    <Compile Include="ANHSP.cs" />
     <Compile Include="Model\CHITIETGIOHANG.cs" />
     <Compile Include="Model\COMMENT.cs" />
     <Compile Include="Model\DANHGIA.cs" />
@@ -63,13 +63,15 @@
     <Compile Include="Model\PHANHOI.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Model\SANPHAM.cs" />
-    <Compile Include="Service\SanPhamService.cs" />
+    <Compile Include="Model\SANPHAMService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Service\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

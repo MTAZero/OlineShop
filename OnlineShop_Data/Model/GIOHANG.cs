@@ -19,7 +19,7 @@ namespace OnlineShop_Data
 
         public int? TRANGTHAI { get; set; }
 
-        public int? TONGTIEN { get; set; }
+        public double? TONGTIEN { get; set; }
 
         public int? NGUOIXACNHANID { get; set; }
 

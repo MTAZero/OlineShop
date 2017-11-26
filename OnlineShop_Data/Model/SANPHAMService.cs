@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OnlineShop_Data.Service
 {
-    class SANPHAMService : IService<SANPHAM>
+    public class SANPHAMService : IService<SANPHAM>
     {
         private OnlineShop_DbContext dataContext = new OnlineShop_DbContext();
 

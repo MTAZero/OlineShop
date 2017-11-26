@@ -10,6 +10,8 @@ namespace OnlineShop_Data
         public OnlineShop_DbContext()
             : base("name=OnlineShop_DbContext")
         {
+            var ensureDLLIsCopied =
+                System.Data.Entity.SqlServer.SqlProviderServices.Instance;
         }
 
         public virtual DbSet<ANHSP> ANHSPs { get; set; }

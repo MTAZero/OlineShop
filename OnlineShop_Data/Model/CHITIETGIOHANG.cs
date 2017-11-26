@@ -15,9 +15,9 @@ namespace OnlineShop_Data
 
         public int? SOLUONG { get; set; }
 
-        public int? DONGIA { get; set; }
+        public double? DONGIA { get; set; }
 
-        public int? THANHTIEN { get; set; }
+        public double? THANHTIEN { get; set; }
 
         public int? KICHTHUOCID { get; set; }
 
