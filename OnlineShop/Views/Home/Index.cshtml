@@ -1,6 +1,7 @@
 ﻿
 @using OnlineShop_Data
-@model List<SANPHAM>
+@using OnlineShop.Models
+@model DanhSachSanPham
 
 @{
     ViewBag.Title = "Index";
@@ -204,10 +205,10 @@
                 <li> Bag</li>
             </ul>
             <div class="resp-tabs-container">
-                <!--/tab_one Footwear -->
+                <!-- Giày -->
                 <div class="tab1">
 
-                    @foreach (var item in @Model)
+                    @foreach (var item in @Model.Giays)
                     {
                         string zz = "/Content/Client/images/AnhSP/SanPham_1.jpg";
                         <div class="col-md-3 product-men">
@@ -217,14 +218,13 @@
                                     <img src="~/Content/Client/images/AnhSP/SanPham_2.jpg" alt="" class="pro-image-back">
                                     <div class="men-cart-pro">
                                         <div class="inner-men-cart-pro">
-                                            <a href="single.html" class="link-product-add-cart">Quick View</a>
+                                            <a href="/Home/ChiTiet/@item.ID" class="link-product-add-cart">Quick View</a>
                                         </div>
                                     </div>
                                     <span class="product-new-top">Hot</span>
-
                                 </div>
                                 <div class="item-info-product ">
-                                    <h4><a href="single.html">@item.TEN</a></h4>
+                                    <h4><a href="/Home/ChiTiet/@item.ID">@item.TEN</a></h4>
                                     <div class="info-product-price">
                                         <span class="item_price">
                                             @{
@@ -259,15 +259,15 @@
                         </div>
                                                 }
 
-
                     <div class="clearfix"></div>
                 </div>
 
-                <div class="tab3">
+                <!-- Quan Áo -->
+                <div class="tab1">
 
-                    @for (int i = 1; i <= 0; i++)
+                    @foreach (var item in @Model.QuanAo)
                     {
-                        string zz = "/Content/Client/images/AnhSP/SanPham_" + (i % 3 + 1) + ".jpg";
+                        string zz = "/Content/Client/images/AnhSP/SanPham_1.jpg";
                         <div class="col-md-3 product-men">
                             <div class="men-pro-item simpleCart_shelfItem">
                                 <div class="men-thumb-item">
@@ -275,17 +275,24 @@
                                     <img src="~/Content/Client/images/AnhSP/SanPham_2.jpg" alt="" class="pro-image-back">
                                     <div class="men-cart-pro">
                                         <div class="inner-men-cart-pro">
-                                            <a href="single.html" class="link-product-add-cart">Quick View</a>
+                                            <a href="/Home/ChiTiet/@item.ID" class="link-product-add-cart">Quick View</a>
                                         </div>
                                     </div>
                                     <span class="product-new-top">Hot</span>
-
                                 </div>
                                 <div class="item-info-product ">
-                                    <h4><a href="single.html">Áo trấn thủ</a></h4>
+                                    <h4><a href="/Home/ChiTiet/@item.ID">@item.TEN</a></h4>
                                     <div class="info-product-price">
-                                        <span class="item_price">45000</span>
-                                        <del>80000</del>
+                                        <span class="item_price">
+                                            @{
+
+                                                double giathuc = ((double)item.GIASANPHAM) * (100 - (double)item.KHUYENMAI) / 100;
+
+
+                                                <span>$@giathuc.ToString("0.00")</span>
+                                            }
+                                        </span>
+                                        <del>$@( ((double)item.GIASANPHAM).ToString("0.00"))</del>
                                     </div>
                                     <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
                                         <form action="#" method="post">
@@ -293,10 +300,10 @@
                                                 <input type="hidden" name="cmd" value="_cart" />
                                                 <input type="hidden" name="add" value="1" />
                                                 <input type="hidden" name="business" value="" />
-                                                <input type="hidden" name="item_name" value="Áo trấn thủ" />
-                                                <input type="hidden" name="amount" value="45000" />
-                                                <input type="hidden" name="discount_amount" value="25000" />
-                                                <input type="hidden" name="currency_code" value="VND" />
+                                                <input type="hidden" name="item_name" value="@item.TEN" />
+                                                <input type="hidden" name="amount" value="@giathuc " />
+                                                <input type="hidden" name="discount_amount" value={ (double) item.GIASANPHAM * (100 - @item.KHUYENMAI ) / 100; } />
+                                                <input type="hidden" name="currency_code" value="USD" />
                                                 <input type="hidden" name="return" value="" />
                                                 <input type="hidden" name="cancel_return" value="" />
                                                 <input type="submit" name="submit" value="Add to cart" class="button" />
@@ -307,46 +314,55 @@
                                 </div>
                             </div>
                         </div>
-                    }
-
+                                                }
 
                     <div class="clearfix"></div>
                 </div>
 
-                <!--//tab_one-->
-                @*<!--/tab_one -->
-                    <div class="tab1">
+                <!-- ThatLung -->
+                <div class="tab1">
+
+                    @foreach (var item in @Model.ThatLung)
+                    {
+                        string zz = "/Content/Client/images/AnhSP/SanPham_1.jpg";
                         <div class="col-md-3 product-men">
                             <div class="men-pro-item simpleCart_shelfItem">
                                 <div class="men-thumb-item">
-                                    <img src="~/Content/Client/images/m1.jpg" alt="" class="pro-image-front">
-                                    <img src="~/Content/Client/images/m1.jpg" alt="" class="pro-image-back">
+                                    <img src="@zz" alt="" class="pro-image-front">
+                                    <img src="~/Content/Client/images/AnhSP/SanPham_2.jpg" alt="" class="pro-image-back">
                                     <div class="men-cart-pro">
                                         <div class="inner-men-cart-pro">
-                                            <a href="single.html" class="link-product-add-cart">Quick View</a>
+                                            <a href="/Home/ChiTiet/@item.ID" class="link-product-add-cart">Quick View</a>
                                         </div>
                                     </div>
-                                    <span class="product-new-top">New</span>
-
+                                    <span class="product-new-top">Hot</span>
                                 </div>
                                 <div class="item-info-product ">
-                                    <h4><a href="single.html">Formal Blue Shirt</a></h4>
+                                    <h4><a href="/Home/ChiTiet/@item.ID">@item.TEN</a></h4>
                                     <div class="info-product-price">
-                                        <span class="item_price">$45.99</span>
-                                        <del>$69.71</del>
+                                        <span class="item_price">
+                                            @{
+
+                                                double giathuc = ((double)item.GIASANPHAM) * (100 - (double)item.KHUYENMAI) / 100;
+
+
+                                                <span>$@giathuc.ToString("0.00")</span>
+                                            }
+                                        </span>
+                                        <del>$@( ((double)item.GIASANPHAM).ToString("0.00"))</del>
                                     </div>
                                     <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
                                         <form action="#" method="post">
                                             <fieldset>
                                                 <input type="hidden" name="cmd" value="_cart" />
                                                 <input type="hidden" name="add" value="1" />
-                                                <input type="hidden" name="business" value=" " />
-                                                <input type="hidden" name="item_name" value="Formal Blue Shirt" />
-                                                <input type="hidden" name="amount" value="30.99" />
-                                                <input type="hidden" name="discount_amount" value="1.00" />
+                                                <input type="hidden" name="business" value="" />
+                                                <input type="hidden" name="item_name" value="@item.TEN" />
+                                                <input type="hidden" name="amount" value="@giathuc " />
+                                                <input type="hidden" name="discount_amount" value={ (double) item.GIASANPHAM * (100 - @item.KHUYENMAI ) / 100; } />
                                                 <input type="hidden" name="currency_code" value="USD" />
-                                                <input type="hidden" name="return" value=" " />
-                                                <input type="hidden" name="cancel_return" value=" " />
+                                                <input type="hidden" name="return" value="" />
+                                                <input type="hidden" name="cancel_return" value="" />
                                                 <input type="submit" name="submit" value="Add to cart" class="button" />
                                             </fieldset>
                                         </form>
@@ -355,37 +371,55 @@
                                 </div>
                             </div>
                         </div>
+                                                }
+
+                    <div class="clearfix"></div>
+                </div>
+
+                <!-- Tui xach -->
+                <div class="tab1">
+
+                    @foreach (var item in @Model.TuiXach)
+                    {
+                        string zz = "/Content/Client/images/AnhSP/SanPham_1.jpg";
                         <div class="col-md-3 product-men">
                             <div class="men-pro-item simpleCart_shelfItem">
                                 <div class="men-thumb-item">
-                                    <img src="~/Content/Client/images/m2.jpg" alt="" class="pro-image-front">
-                                    <img src="~/Content/Client/images/m2.jpg" alt="" class="pro-image-back">
+                                    <img src="@zz" alt="" class="pro-image-front">
+                                    <img src="~/Content/Client/images/AnhSP/SanPham_2.jpg" alt="" class="pro-image-back">
                                     <div class="men-cart-pro">
                                         <div class="inner-men-cart-pro">
-                                            <a href="single.html" class="link-product-add-cart">Quick View</a>
+                                            <a href="/Home/ChiTiet/@item.ID" class="link-product-add-cart">Quick View</a>
                                         </div>
                                     </div>
-                                    <span class="product-new-top">New</span>
-
+                                    <span class="product-new-top">Hot</span>
                                 </div>
                                 <div class="item-info-product ">
-                                    <h4><a href="single.html">Gabi Full Sleeve Sweatshirt</a></h4>
+                                    <h4><a href="/Home/ChiTiet/@item.ID">@item.TEN</a></h4>
                                     <div class="info-product-price">
-                                        <span class="item_price">$45.99</span>
-                                        <del>$69.71</del>
+                                        <span class="item_price">
+                                            @{
+
+                                                double giathuc = ((double)item.GIASANPHAM) * (100 - (double)item.KHUYENMAI) / 100;
+
+
+                                                <span>$@giathuc.ToString("0.00")</span>
+                                            }
+                                        </span>
+                                        <del>$@( ((double)item.GIASANPHAM).ToString("0.00"))</del>
                                     </div>
                                     <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
                                         <form action="#" method="post">
                                             <fieldset>
                                                 <input type="hidden" name="cmd" value="_cart" />
                                                 <input type="hidden" name="add" value="1" />
-                                                <input type="hidden" name="business" value=" " />
-                                                <input type="hidden" name="item_name" value="Sweatshirt" />
-                                                <input type="hidden" name="amount" value="30.99" />
-                                                <input type="hidden" name="discount_amount" value="1.00" />
+                                                <input type="hidden" name="business" value="" />
+                                                <input type="hidden" name="item_name" value="@item.TEN" />
+                                                <input type="hidden" name="amount" value="@giathuc " />
+                                                <input type="hidden" name="discount_amount" value={ (double) item.GIASANPHAM * (100 - @item.KHUYENMAI ) / 100; } />
                                                 <input type="hidden" name="currency_code" value="USD" />
-                                                <input type="hidden" name="return" value=" " />
-                                                <input type="hidden" name="cancel_return" value=" " />
+                                                <input type="hidden" name="return" value="" />
+                                                <input type="hidden" name="cancel_return" value="" />
                                                 <input type="submit" name="submit" value="Add to cart" class="button" />
                                             </fieldset>
                                         </form>
@@ -394,1192 +428,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-3 product-men">
-                            <div class="men-pro-item simpleCart_shelfItem">
-                                <div class="men-thumb-item">
-                                    <img src="~/Content/Client/images/m3.jpg" alt="" class="pro-image-front">
-                                    <img src="~/Content/Client/images/m3.jpg" alt="" class="pro-image-back">
-                                    <div class="men-cart-pro">
-                                        <div class="inner-men-cart-pro">
-                                            <a href="single.html" class="link-product-add-cart">Quick View</a>
-                                        </div>
-                                    </div>
-                                    <span class="product-new-top">New</span>
+                                                }
 
-                                </div>
-                                <div class="item-info-product ">
-                                    <h4><a href="single.html">Dark Blue Track Pants</a></h4>
-                                    <div class="info-product-price">
-                                        <span class="item_price">$80.99</span>
-                                        <del>$89.71</del>
-                                    </div>
-                                    <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-                                        <form action="#" method="post">
-                                            <fieldset>
-                                                <input type="hidden" name="cmd" value="_cart" />
-                                                <input type="hidden" name="add" value="1" />
-                                                <input type="hidden" name="business" value=" " />
-                                                <input type="hidden" name="item_name" value="Dark Blue Track Pants" />
-                                                <input type="hidden" name="amount" value="30.99" />
-                                                <input type="hidden" name="discount_amount" value="1.00" />
-                                                <input type="hidden" name="currency_code" value="USD" />
-                                                <input type="hidden" name="return" value=" " />
-                                                <input type="hidden" name="cancel_return" value=" " />
-                                                <input type="submit" name="submit" value="Add to cart" class="button" />
-                                            </fieldset>
-                                        </form>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 product-men">
-                            <div class="men-pro-item simpleCart_shelfItem">
-                                <div class="men-thumb-item">
-                                    <img src="~/Content/Client/images/m4.jpg" alt="" class="pro-image-front">
-                                    <img src="~/Content/Client/images/m4.jpg" alt="" class="pro-image-back">
-                                    <div class="men-cart-pro">
-                                        <div class="inner-men-cart-pro">
-                                            <a href="single.html" class="link-product-add-cart">Quick View</a>
-                                        </div>
-                                    </div>
-                                    <span class="product-new-top">New</span>
-
-                                </div>
-                                <div class="item-info-product ">
-                                    <h4><a href="single.html">Round Neck Black T-Shirt</a></h4>
-                                    <div class="info-product-price">
-                                        <span class="item_price">$190.99</span>
-                                        <del>$159.71</del>
-                                    </div>
-                                    <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-                                        <form action="#" method="post">
-                                            <fieldset>
-                                                <input type="hidden" name="cmd" value="_cart" />
-                                                <input type="hidden" name="add" value="1" />
-                                                <input type="hidden" name="business" value=" " />
-                                                <input type="hidden" name="item_name" value="Black T-Shirt" />
-                                                <input type="hidden" name="amount" value="30.99" />
-                                                <input type="hidden" name="discount_amount" value="1.00" />
-                                                <input type="hidden" name="currency_code" value="USD" />
-                                                <input type="hidden" name="return" value=" " />
-                                                <input type="hidden" name="cancel_return" value=" " />
-                                                <input type="submit" name="submit" value="Add to cart" class="button" />
-                                            </fieldset>
-                                        </form>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 product-men">
-                            <div class="men-pro-item simpleCart_shelfItem">
-                                <div class="men-thumb-item">
-                                    <img src="~/Content/Client/images/m5.jpg" alt="" class="pro-image-front">
-                                    <img src="~/Content/Client/images/m5.jpg" alt="" class="pro-image-back">
-                                    <div class="men-cart-pro">
-                                        <div class="inner-men-cart-pro">
-                                            <a href="single.html" class="link-product-add-cart">Quick View</a>
-                                        </div>
-                                    </div>
-                                    <span class="product-new-top">New</span>
-
-                                </div>
-                                <div class="item-info-product ">
-                                    <h4><a href="single.html">Men's Black Jeans</a></h4>
-                                    <div class="info-product-price">
-                                        <span class="item_price">$60.99</span>
-                                        <del>$90.71</del>
-                                    </div>
-                                    <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-                                        <form action="#" method="post">
-                                            <fieldset>
-                                                <input type="hidden" name="cmd" value="_cart" />
-                                                <input type="hidden" name="add" value="1" />
-                                                <input type="hidden" name="business" value=" " />
-                                                <input type="hidden" name="item_name" value="Men's Black Jeans" />
-                                                <input type="hidden" name="amount" value="30.99" />
-                                                <input type="hidden" name="discount_amount" value="1.00" />
-                                                <input type="hidden" name="currency_code" value="USD" />
-                                                <input type="hidden" name="return" value=" " />
-                                                <input type="hidden" name="cancel_return" value=" " />
-                                                <input type="submit" name="submit" value="Add to cart" class="button" />
-                                            </fieldset>
-                                        </form>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 product-men">
-                            <div class="men-pro-item simpleCart_shelfItem">
-                                <div class="men-thumb-item">
-                                    <img src="~/Content/Client/images/m7.jpg" alt="" class="pro-image-front">
-                                    <img src="~/Content/Client/images/m7.jpg" alt="" class="pro-image-back">
-                                    <div class="men-cart-pro">
-                                        <div class="inner-men-cart-pro">
-                                            <a href="single.html" class="link-product-add-cart">Quick View</a>
-                                        </div>
-                                    </div>
-                                    <span class="product-new-top">New</span>
-
-                                </div>
-                                <div class="item-info-product ">
-                                    <h4><a href="single.html">Analog Watch</a></h4>
-                                    <div class="info-product-price">
-                                        <span class="item_price">$160.99</span>
-                                        <del>$290.71</del>
-                                    </div>
-                                    <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-                                        <form action="#" method="post">
-                                            <fieldset>
-                                                <input type="hidden" name="cmd" value="_cart" />
-                                                <input type="hidden" name="add" value="1" />
-                                                <input type="hidden" name="business" value=" " />
-                                                <input type="hidden" name="item_name" value="Analog Watch" />
-                                                <input type="hidden" name="amount" value="30.99" />
-                                                <input type="hidden" name="discount_amount" value="1.00" />
-                                                <input type="hidden" name="currency_code" value="USD" />
-                                                <input type="hidden" name="return" value=" " />
-                                                <input type="hidden" name="cancel_return" value=" " />
-                                                <input type="submit" name="submit" value="Add to cart" class="button" />
-                                            </fieldset>
-                                        </form>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 product-men">
-                            <div class="men-pro-item simpleCart_shelfItem">
-                                <div class="men-thumb-item">
-                                    <img src="~/Content/Client/images/m6.jpg" alt="" class="pro-image-front">
-                                    <img src="images/m6.jpg" alt="" class="pro-image-back">
-                                    <div class="~/Content/Client/men-cart-pro">
-                                        <div class="inner-men-cart-pro">
-                                            <a href="single.html" class="link-product-add-cart">Quick View</a>
-                                        </div>
-                                    </div>
-                                    <span class="product-new-top">New</span>
-
-                                </div>
-                                <div class="item-info-product ">
-                                    <h4><a href="single.html">Reversible Belt</a></h4>
-                                    <div class="info-product-price">
-                                        <span class="item_price">$30.99</span>
-                                        <del>$50.71</del>
-                                    </div>
-                                    <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-                                        <form action="#" method="post">
-                                            <fieldset>
-                                                <input type="hidden" name="cmd" value="_cart" />
-                                                <input type="hidden" name="add" value="1" />
-                                                <input type="hidden" name="business" value=" " />
-                                                <input type="hidden" name="item_name" value="Reversible Belt" />
-                                                <input type="hidden" name="amount" value="30.99" />
-                                                <input type="hidden" name="discount_amount" value="1.00" />
-                                                <input type="hidden" name="currency_code" value="USD" />
-                                                <input type="hidden" name="return" value=" " />
-                                                <input type="hidden" name="cancel_return" value=" " />
-                                                <input type="submit" name="submit" value="Add to cart" class="button" />
-                                            </fieldset>
-                                        </form>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 product-men">
-                            <div class="men-pro-item simpleCart_shelfItem">
-                                <div class="men-thumb-item">
-                                    <img src="~/Content/Client/images/m8.jpg" alt="" class="pro-image-front">
-                                    <img src="~/Content/Client/images/m8.jpg" alt="" class="pro-image-back">
-                                    <div class="men-cart-pro">
-                                        <div class="inner-men-cart-pro">
-                                            <a href="single.html" class="link-product-add-cart">Quick View</a>
-                                        </div>
-                                    </div>
-                                    <span class="product-new-top">New</span>
-
-                                </div>
-                                <div class="item-info-product ">
-                                    <h4><a href="single.html">Party Men's Blazer</a></h4>
-                                    <div class="info-product-price">
-                                        <span class="item_price">$260.99</span>
-                                        <del>$390.71</del>
-                                    </div>
-                                    <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-                                        <form action="#" method="post">
-                                            <fieldset>
-                                                <input type="hidden" name="cmd" value="_cart" />
-                                                <input type="hidden" name="add" value="1" />
-                                                <input type="hidden" name="business" value=" " />
-                                                <input type="hidden" name="item_name" value="Party Men's Blazer" />
-                                                <input type="hidden" name="amount" value="30.99" />
-                                                <input type="hidden" name="discount_amount" value="1.00" />
-                                                <input type="hidden" name="currency_code" value="USD" />
-                                                <input type="hidden" name="return" value=" " />
-                                                <input type="hidden" name="cancel_return" value=" " />
-                                                <input type="submit" name="submit" value="Add to cart" class="button" />
-                                            </fieldset>
-                                        </form>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                    <!--//tab_one-->
-                    <!--/tab_two-->
-                    <div class="tab2">
-                        <div class="col-md-3 product-men">
-                            <div class="men-pro-item simpleCart_shelfItem">
-                                <div class="men-thumb-item">
-                                    <img src="~/Content/Client/images/w1.jpg" alt="" class="pro-image-front">
-                                    <img src="~/Content/Client/images/w1.jpg" alt="" class="pro-image-back">
-                                    <div class="men-cart-pro">
-                                        <div class="inner-men-cart-pro">
-                                            <a href="single.html" class="link-product-add-cart">Quick View</a>
-                                        </div>
-                                    </div>
-                                    <span class="product-new-top">New</span>
-
-                                </div>
-                                <div class="item-info-product ">
-                                    <h4><a href="single.html">A-line Black Skirt</a></h4>
-                                    <div class="info-product-price">
-                                        <span class="item_price">$130.99</span>
-                                        <del>$189.71</del>
-                                    </div>
-                                    <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-                                        <form action="#" method="post">
-                                            <fieldset>
-                                                <input type="hidden" name="cmd" value="_cart" />
-                                                <input type="hidden" name="add" value="1" />
-                                                <input type="hidden" name="business" value=" " />
-                                                <input type="hidden" name="item_name" value="A-line Black Skirt" />
-                                                <input type="hidden" name="amount" value="30.99" />
-                                                <input type="hidden" name="discount_amount" value="1.00" />
-                                                <input type="hidden" name="currency_code" value="USD" />
-                                                <input type="hidden" name="return" value=" " />
-                                                <input type="hidden" name="cancel_return" value=" " />
-                                                <input type="submit" name="submit" value="Add to cart" class="button" />
-                                            </fieldset>
-                                        </form>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 product-men">
-                            <div class="men-pro-item simpleCart_shelfItem">
-                                <div class="men-thumb-item">
-                                    <img src="~/Content/Client/images/w2.jpg" alt="" class="pro-image-front">
-                                    <img src="~/Content/Client/images/w2.jpg" alt="" class="pro-image-back">
-                                    <div class="men-cart-pro">
-                                        <div class="inner-men-cart-pro">
-                                            <a href="single.html" class="link-product-add-cart">Quick View</a>
-                                        </div>
-                                    </div>
-                                    <span class="product-new-top">New</span>
-
-                                </div>
-                                <div class="item-info-product ">
-                                    <h4><a href="single.html">Sleeveless Solid Blue Top</a></h4>
-                                    <div class="info-product-price">
-                                        <span class="item_price">$140.99</span>
-                                        <del>$189.71</del>
-                                    </div>
-                                    <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-                                        <form action="#" method="post">
-                                            <fieldset>
-                                                <input type="hidden" name="cmd" value="_cart" />
-                                                <input type="hidden" name="add" value="1" />
-                                                <input type="hidden" name="business" value=" " />
-                                                <input type="hidden" name="item_name" value="Sleeveless Solid Blue Top" />
-                                                <input type="hidden" name="amount" value="30.99" />
-                                                <input type="hidden" name="discount_amount" value="1.00" />
-                                                <input type="hidden" name="currency_code" value="USD" />
-                                                <input type="hidden" name="return" value=" " />
-                                                <input type="hidden" name="cancel_return" value=" " />
-                                                <input type="submit" name="submit" value="Add to cart" class="button" />
-                                            </fieldset>
-                                        </form>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 product-men">
-                            <div class="men-pro-item simpleCart_shelfItem">
-                                <div class="men-thumb-item">
-                                    <img src="~/Content/Client/images/w3.jpg" alt="" class="pro-image-front">
-                                    <img src="~/Content/Client/images/w3.jpg" alt="" class="pro-image-back">
-                                    <div class="men-cart-pro">
-                                        <div class="inner-men-cart-pro">
-                                            <a href="single.html" class="link-product-add-cart">Quick View</a>
-                                        </div>
-                                    </div>
-                                    <span class="product-new-top">New</span>
-
-                                </div>
-                                <div class="item-info-product ">
-                                    <h4><a href="single.html">Skinny Jeans</a></h4>
-                                    <div class="info-product-price">
-                                        <span class="item_price">$150.99</span>
-                                        <del>$189.71</del>
-                                    </div>
-                                    <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-                                        <form action="#" method="post">
-                                            <fieldset>
-                                                <input type="hidden" name="cmd" value="_cart" />
-                                                <input type="hidden" name="add" value="1" />
-                                                <input type="hidden" name="business" value=" " />
-                                                <input type="hidden" name="item_name" value="Skinny Jeans " />
-                                                <input type="hidden" name="amount" value="30.99" />
-                                                <input type="hidden" name="discount_amount" value="1.00" />
-                                                <input type="hidden" name="currency_code" value="USD" />
-                                                <input type="hidden" name="return" value=" " />
-                                                <input type="hidden" name="cancel_return" value=" " />
-                                                <input type="submit" name="submit" value="Add to cart" class="button" />
-                                            </fieldset>
-                                        </form>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 product-men">
-                            <div class="men-pro-item simpleCart_shelfItem">
-                                <div class="men-thumb-item">
-                                    <img src="~/Content/Client/images/w4.jpg" alt="" class="pro-image-front">
-                                    <img src="~/Content/Client/images/w4.jpg" alt="" class="pro-image-back">
-                                    <div class="men-cart-pro">
-                                        <div class="inner-men-cart-pro">
-                                            <a href="single.html" class="link-product-add-cart">Quick View</a>
-                                        </div>
-                                    </div>
-                                    <span class="product-new-top">New</span>
-
-                                </div>
-                                <div class="item-info-product ">
-                                    <h4><a href="single.html">Black Basic Shorts</a></h4>
-                                    <div class="info-product-price">
-                                        <span class="item_price">$120.99</span>
-                                        <del>$189.71</del>
-                                    </div>
-                                    <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-                                        <form action="#" method="post">
-                                            <fieldset>
-                                                <input type="hidden" name="cmd" value="_cart" />
-                                                <input type="hidden" name="add" value="1" />
-                                                <input type="hidden" name="business" value=" " />
-                                                <input type="hidden" name="item_name" value="Black Basic Shorts" />
-                                                <input type="hidden" name="amount" value="30.99" />
-                                                <input type="hidden" name="discount_amount" value="1.00" />
-                                                <input type="hidden" name="currency_code" value="USD" />
-                                                <input type="hidden" name="return" value=" " />
-                                                <input type="hidden" name="cancel_return" value=" " />
-                                                <input type="submit" name="submit" value="Add to cart" class="button" />
-                                            </fieldset>
-                                        </form>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 product-men">
-                            <div class="men-pro-item simpleCart_shelfItem">
-                                <div class="men-thumb-item">
-                                    <img src="~/Content/Client/images/w5.jpg" alt="" class="pro-image-front">
-                                    <img src="~/Content/Client/images/w5.jpg" alt="" class="pro-image-back">
-                                    <div class="men-cart-pro">
-                                        <div class="inner-men-cart-pro">
-                                            <a href="single.html" class="link-product-add-cart">Quick View</a>
-                                        </div>
-                                    </div>
-                                    <span class="product-new-top">New</span>
-
-                                </div>
-                                <div class="item-info-product ">
-                                    <h4><a href="single.html">Pink Track Pants</a></h4>
-                                    <div class="info-product-price">
-                                        <span class="item_price">$220.99</span>
-                                        <del>$389.71</del>
-                                    </div>
-                                    <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-                                        <form action="#" method="post">
-                                            <fieldset>
-                                                <input type="hidden" name="cmd" value="_cart" />
-                                                <input type="hidden" name="add" value="1" />
-                                                <input type="hidden" name="business" value=" " />
-                                                <input type="hidden" name="item_name" value="Pink Track Pants" />
-                                                <input type="hidden" name="amount" value="30.99" />
-                                                <input type="hidden" name="discount_amount" value="1.00" />
-                                                <input type="hidden" name="currency_code" value="USD" />
-                                                <input type="hidden" name="return" value=" " />
-                                                <input type="hidden" name="cancel_return" value=" " />
-                                                <input type="submit" name="submit" value="Add to cart" class="button" />
-                                            </fieldset>
-                                        </form>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 product-men">
-                            <div class="men-pro-item simpleCart_shelfItem">
-                                <div class="men-thumb-item">
-                                    <img src="~/Content/Client/images/w6.jpg" alt="" class="pro-image-front">
-                                    <img src="~/Content/Client/images/w6.jpg" alt="" class="pro-image-back">
-                                    <div class="men-cart-pro">
-                                        <div class="inner-men-cart-pro">
-                                            <a href="single.html" class="link-product-add-cart">Quick View</a>
-                                        </div>
-                                    </div>
-                                    <span class="product-new-top">New</span>
-
-                                </div>
-                                <div class="item-info-product ">
-                                    <h4><a href="single.html">Analog Watch</a></h4>
-                                    <div class="info-product-price">
-                                        <span class="item_price">$320.99</span>
-                                        <del>$489.71</del>
-                                    </div>
-                                    <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-                                        <form action="#" method="post">
-                                            <fieldset>
-                                                <input type="hidden" name="cmd" value="_cart" />
-                                                <input type="hidden" name="add" value="1" />
-                                                <input type="hidden" name="business" value=" " />
-                                                <input type="hidden" name="item_name" value="Analog Watch" />
-                                                <input type="hidden" name="amount" value="30.99" />
-                                                <input type="hidden" name="discount_amount" value="1.00" />
-                                                <input type="hidden" name="currency_code" value="USD" />
-                                                <input type="hidden" name="return" value=" " />
-                                                <input type="hidden" name="cancel_return" value=" " />
-                                                <input type="submit" name="submit" value="Add to cart" class="button" />
-                                            </fieldset>
-                                        </form>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 product-men">
-                            <div class="men-pro-item simpleCart_shelfItem">
-                                <div class="men-thumb-item">
-                                    <img src="~/Content/Client/images/w7.jpg" alt="" class="pro-image-front">
-                                    <img src="~/Content/Client/images/w7.jpg" alt="" class="pro-image-back">
-                                    <div class="men-cart-pro">
-                                        <div class="inner-men-cart-pro">
-                                            <a href="single.html" class="link-product-add-cart">Quick View</a>
-                                        </div>
-                                    </div>
-                                    <span class="product-new-top">New</span>
-
-                                </div>
-                                <div class="item-info-product ">
-                                    <h4><a href="single.html">Ankle Length Socks</a></h4>
-                                    <div class="info-product-price">
-                                        <span class="item_price">$100.99</span>
-                                        <del>$159.71</del>
-                                    </div>
-                                    <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-                                        <form action="#" method="post">
-                                            <fieldset>
-                                                <input type="hidden" name="cmd" value="_cart" />
-                                                <input type="hidden" name="add" value="1" />
-                                                <input type="hidden" name="business" value=" " />
-                                                <input type="hidden" name="item_name" value="Ankle Length Socks" />
-                                                <input type="hidden" name="amount" value="30.99" />
-                                                <input type="hidden" name="discount_amount" value="1.00" />
-                                                <input type="hidden" name="currency_code" value="USD" />
-                                                <input type="hidden" name="return" value=" " />
-                                                <input type="hidden" name="cancel_return" value=" " />
-                                                <input type="submit" name="submit" value="Add to cart" class="button" />
-                                            </fieldset>
-                                        </form>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 product-men">
-                            <div class="men-pro-item simpleCart_shelfItem">
-                                <div class="men-thumb-item">
-                                    <img src="~/Content/Client/images/w8.jpg" alt="" class="pro-image-front">
-                                    <img src="~/Content/Client/images/w8.jpg" alt="" class="pro-image-back">
-                                    <div class="men-cart-pro">
-                                        <div class="inner-men-cart-pro">
-                                            <a href="single.html" class="link-product-add-cart">Quick View</a>
-                                        </div>
-                                    </div>
-                                    <span class="product-new-top">New</span>
-
-                                </div>
-                                <div class="item-info-product ">
-                                    <h4><a href="single.html">Reebok Women's Tights</a></h4>
-                                    <div class="info-product-price">
-                                        <span class="item_price">$130.99</span>
-                                        <del>$169.71</del>
-                                    </div>
-                                    <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-                                        <form action="#" method="post">
-                                            <fieldset>
-                                                <input type="hidden" name="cmd" value="_cart" />
-                                                <input type="hidden" name="add" value="1" />
-                                                <input type="hidden" name="business" value=" " />
-                                                <input type="hidden" name="item_name" value="Reebok Women's Tights" />
-                                                <input type="hidden" name="amount" value="30.99" />
-                                                <input type="hidden" name="discount_amount" value="1.00" />
-                                                <input type="hidden" name="currency_code" value="USD" />
-                                                <input type="hidden" name="return" value=" " />
-                                                <input type="hidden" name="cancel_return" value=" " />
-                                                <input type="submit" name="submit" value="Add to cart" class="button" />
-                                            </fieldset>
-                                        </form>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                    <!--//tab_two-->
-                    <div class="tab3">
-
-                        <div class="col-md-3 product-men">
-                            <div class="men-pro-item simpleCart_shelfItem">
-                                <div class="men-thumb-item">
-                                    <img src="~/Content/Client/images/b1.jpg" alt="" class="pro-image-front">
-                                    <img src="~/Content/Client/images/b1.jpg" alt="" class="pro-image-back">
-                                    <div class="men-cart-pro">
-                                        <div class="inner-men-cart-pro">
-                                            <a href="single.html" class="link-product-add-cart">Quick View</a>
-                                        </div>
-                                    </div>
-                                    <span class="product-new-top">New</span>
-
-                                </div>
-                                <div class="item-info-product ">
-                                    <h4><a href="single.html">Laptop Messenger Bag</a></h4>
-                                    <div class="info-product-price">
-                                        <span class="item_price">$140.99</span>
-                                        <del>$169.71</del>
-                                    </div>
-                                    <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-                                        <form action="#" method="post">
-                                            <fieldset>
-                                                <input type="hidden" name="cmd" value="_cart" />
-                                                <input type="hidden" name="add" value="1" />
-                                                <input type="hidden" name="business" value=" " />
-                                                <input type="hidden" name="item_name" value=" Laptop Messenger Bag" />
-                                                <input type="hidden" name="amount" value="30.99" />
-                                                <input type="hidden" name="discount_amount" value="1.00" />
-                                                <input type="hidden" name="currency_code" value="USD" />
-                                                <input type="hidden" name="return" value=" " />
-                                                <input type="hidden" name="cancel_return" value=" " />
-                                                <input type="submit" name="submit" value="Add to cart" class="button" />
-                                            </fieldset>
-                                        </form>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 product-men">
-                            <div class="men-pro-item simpleCart_shelfItem">
-                                <div class="men-thumb-item">
-                                    <img src="~/Content/Client/images/b2.jpg" alt="" class="pro-image-front">
-                                    <img src="~/Content/Client/images/b2.jpg" alt="" class="pro-image-back">
-                                    <div class="men-cart-pro">
-                                        <div class="inner-men-cart-pro">
-                                            <a href="single.html" class="link-product-add-cart">Quick View</a>
-                                        </div>
-                                    </div>
-                                    <span class="product-new-top">New</span>
-
-                                </div>
-                                <div class="item-info-product ">
-                                    <h4><a href="single.html">Puma Backpack</a></h4>
-                                    <div class="info-product-price">
-                                        <span class="item_price">$127.99</span>
-                                        <del>$169.71</del>
-                                    </div>
-                                    <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-                                        <form action="#" method="post">
-                                            <fieldset>
-                                                <input type="hidden" name="cmd" value="_cart" />
-                                                <input type="hidden" name="add" value="1" />
-                                                <input type="hidden" name="business" value=" " />
-                                                <input type="hidden" name="item_name" value="Puma Backpack" />
-                                                <input type="hidden" name="amount" value="30.99" />
-                                                <input type="hidden" name="discount_amount" value="1.00" />
-                                                <input type="hidden" name="currency_code" value="USD" />
-                                                <input type="hidden" name="return" value=" " />
-                                                <input type="hidden" name="cancel_return" value=" " />
-                                                <input type="submit" name="submit" value="Add to cart" class="button" />
-                                            </fieldset>
-                                        </form>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 product-men">
-                            <div class="men-pro-item simpleCart_shelfItem">
-                                <div class="men-thumb-item">
-                                    <img src="~/Content/Client/images/b3.jpg" alt="" class="pro-image-front">
-                                    <img src="~/Content/Client/images/b3.jpg" alt="" class="pro-image-back">
-                                    <div class="men-cart-pro">
-                                        <div class="inner-men-cart-pro">
-                                            <a href="single.html" class="link-product-add-cart">Quick View</a>
-                                        </div>
-                                    </div>
-                                    <span class="product-new-top">New</span>
-
-                                </div>
-                                <div class="item-info-product ">
-                                    <h4><a href="single.html"> Laptop Backpack</a></h4>
-                                    <div class="info-product-price">
-                                        <span class="item_price">$120.99</span>
-                                        <del>$189.71</del>
-                                    </div>
-                                    <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-                                        <form action="#" method="post">
-                                            <fieldset>
-                                                <input type="hidden" name="cmd" value="_cart" />
-                                                <input type="hidden" name="add" value="1" />
-                                                <input type="hidden" name="business" value=" " />
-                                                <input type="hidden" name="item_name" value=" Laptop Backpack" />
-                                                <input type="hidden" name="amount" value="30.99" />
-                                                <input type="hidden" name="discount_amount" value="1.00" />
-                                                <input type="hidden" name="currency_code" value="USD" />
-                                                <input type="hidden" name="return" value=" " />
-                                                <input type="hidden" name="cancel_return" value=" " />
-                                                <input type="submit" name="submit" value="Add to cart" class="button" />
-                                            </fieldset>
-                                        </form>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 product-men">
-                            <div class="men-pro-item simpleCart_shelfItem">
-                                <div class="men-thumb-item">
-                                    <img src="~/Content/Client/images/b4.jpg" alt="" class="pro-image-front">
-                                    <img src="~/Content/Client/images/b4.jpg" alt="" class="pro-image-back">
-                                    <div class="men-cart-pro">
-                                        <div class="inner-men-cart-pro">
-                                            <a href="single.html" class="link-product-add-cart">Quick View</a>
-                                        </div>
-                                    </div>
-                                    <span class="product-new-top">New</span>
-
-                                </div>
-                                <div class="item-info-product ">
-                                    <h4><a href="single.html">Travel Duffel Bag </a></h4>
-                                    <div class="info-product-price">
-                                        <span class="item_price">$190.99</span>
-                                        <del>$259.71</del>
-                                    </div>
-                                    <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-                                        <form action="#" method="post">
-                                            <fieldset>
-                                                <input type="hidden" name="cmd" value="_cart" />
-                                                <input type="hidden" name="add" value="1" />
-                                                <input type="hidden" name="business" value=" " />
-                                                <input type="hidden" name="item_name" value="Travel Duffel Bag " />
-                                                <input type="hidden" name="amount" value="30.99" />
-                                                <input type="hidden" name="discount_amount" value="1.00" />
-                                                <input type="hidden" name="currency_code" value="USD" />
-                                                <input type="hidden" name="return" value=" " />
-                                                <input type="hidden" name="cancel_return" value=" " />
-                                                <input type="submit" name="submit" value="Add to cart" class="button" />
-                                            </fieldset>
-                                        </form>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 product-men">
-                            <div class="men-pro-item simpleCart_shelfItem">
-                                <div class="men-thumb-item">
-                                    <img src="~/Content/Client/images/b5.jpg" alt="" class="pro-image-front">
-                                    <img src="~/Content/Client/images/b5.jpg" alt="" class="pro-image-back">
-                                    <div class="men-cart-pro">
-                                        <div class="inner-men-cart-pro">
-                                            <a href="single.html" class="link-product-add-cart">Quick View</a>
-                                        </div>
-                                    </div>
-                                    <span class="product-new-top">New</span>
-
-                                </div>
-                                <div class="item-info-product ">
-                                    <h4><a href="single.html"> Hand-held Bag </a></h4>
-                                    <div class="info-product-price">
-                                        <span class="item_price">$190.99</span>
-                                        <del>$259.71</del>
-                                    </div>
-                                    <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-                                        <form action="#" method="post">
-                                            <fieldset>
-                                                <input type="hidden" name="cmd" value="_cart" />
-                                                <input type="hidden" name="add" value="1" />
-                                                <input type="hidden" name="business" value=" " />
-                                                <input type="hidden" name="item_name" value=" Hand-held Bag " />
-                                                <input type="hidden" name="amount" value="30.99" />
-                                                <input type="hidden" name="discount_amount" value="1.00" />
-                                                <input type="hidden" name="currency_code" value="USD" />
-                                                <input type="hidden" name="return" value=" " />
-                                                <input type="hidden" name="cancel_return" value=" " />
-                                                <input type="submit" name="submit" value="Add to cart" class="button" />
-                                            </fieldset>
-                                        </form>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 product-men">
-                            <div class="men-pro-item simpleCart_shelfItem">
-                                <div class="men-thumb-item">
-                                    <img src="~/Content/Client/images/b6.jpg" alt="" class="pro-image-front">
-                                    <img src="~/Content/Client/images/b6.jpg" alt="" class="pro-image-back">
-                                    <div class="men-cart-pro">
-                                        <div class="inner-men-cart-pro">
-                                            <a href="single.html" class="link-product-add-cart">Quick View</a>
-                                        </div>
-                                    </div>
-                                    <span class="product-new-top">New</span>
-
-                                </div>
-                                <div class="item-info-product ">
-                                    <h4><a href="single.html">Butterflies Bag </a></h4>
-                                    <div class="info-product-price">
-                                        <span class="item_price">$190.99</span>
-                                        <del>$259.71</del>
-                                    </div>
-                                    <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-                                        <form action="#" method="post">
-                                            <fieldset>
-                                                <input type="hidden" name="cmd" value="_cart" />
-                                                <input type="hidden" name="add" value="1" />
-                                                <input type="hidden" name="business" value=" " />
-                                                <input type="hidden" name="item_name" value="Butterflies Bag" />
-                                                <input type="hidden" name="amount" value="30.99" />
-                                                <input type="hidden" name="discount_amount" value="1.00" />
-                                                <input type="hidden" name="currency_code" value="USD" />
-                                                <input type="hidden" name="return" value=" " />
-                                                <input type="hidden" name="cancel_return" value=" " />
-                                                <input type="submit" name="submit" value="Add to cart" class="button" />
-                                            </fieldset>
-                                        </form>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 product-men">
-                            <div class="men-pro-item simpleCart_shelfItem">
-                                <div class="men-thumb-item">
-                                    <img src="~/Content/Client/images/b7.jpg" alt="" class="pro-image-front">
-                                    <img src="~/Content/Client/images/b7.jpg" alt="" class="pro-image-back">
-                                    <div class="men-cart-pro">
-                                        <div class="inner-men-cart-pro">
-                                            <a href="single.html" class="link-product-add-cart">Quick View</a>
-                                        </div>
-                                    </div>
-                                    <span class="product-new-top">New</span>
-
-                                </div>
-                                <div class="item-info-product ">
-                                    <h4><a href="single.html">Costa Swiss Bag </a></h4>
-                                    <div class="info-product-price">
-                                        <span class="item_price">$290.99</span>
-                                        <del>$359.71</del>
-                                    </div>
-                                    <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-                                        <form action="#" method="post">
-                                            <fieldset>
-                                                <input type="hidden" name="cmd" value="_cart" />
-                                                <input type="hidden" name="add" value="1" />
-                                                <input type="hidden" name="business" value=" " />
-                                                <input type="hidden" name="item_name" value="Costa Swiss Bag" />
-                                                <input type="hidden" name="amount" value="30.99" />
-                                                <input type="hidden" name="discount_amount" value="1.00" />
-                                                <input type="hidden" name="currency_code" value="USD" />
-                                                <input type="hidden" name="return" value=" " />
-                                                <input type="hidden" name="cancel_return" value=" " />
-                                                <input type="submit" name="submit" value="Add to cart" class="button" />
-                                            </fieldset>
-                                        </form>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 product-men">
-                            <div class="men-pro-item simpleCart_shelfItem">
-                                <div class="men-thumb-item">
-                                    <img src="~/Content/Client/images/b8.jpg" alt="" class="pro-image-front">
-                                    <img src="~/Content/Client/images/b8.jpg" alt="" class="pro-image-back">
-                                    <div class="men-cart-pro">
-                                        <div class="inner-men-cart-pro">
-                                            <a href="single.html" class="link-product-add-cart">Quick View</a>
-                                        </div>
-                                    </div>
-                                    <span class="product-new-top">New</span>
-
-                                </div>
-                                <div class="item-info-product ">
-                                    <h4><a href="single.html">Noble Designs Bag </a></h4>
-                                    <div class="info-product-price">
-                                        <span class="item_price">$120.99</span>
-                                        <del>$159.71</del>
-                                    </div>
-                                    <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-                                        <form action="#" method="post">
-                                            <fieldset>
-                                                <input type="hidden" name="cmd" value="_cart" />
-                                                <input type="hidden" name="add" value="1" />
-                                                <input type="hidden" name="business" value=" " />
-                                                <input type="hidden" name="item_name" value="Noble Designs Bag " />
-                                                <input type="hidden" name="amount" value="30.99" />
-                                                <input type="hidden" name="discount_amount" value="1.00" />
-                                                <input type="hidden" name="currency_code" value="USD" />
-                                                <input type="hidden" name="return" value=" " />
-                                                <input type="hidden" name="cancel_return" value=" " />
-                                                <input type="submit" name="submit" value="Add to cart" class="button" />
-                                            </fieldset>
-                                        </form>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="tab4">
-
-                        <div class="col-md-3 product-men">
-                            <div class="men-pro-item simpleCart_shelfItem">
-                                <div class="men-thumb-item">
-                                    <img src="~/Content/Client/images/s1.jpg" alt="" class="pro-image-front">
-                                    <img src="~/Content/Client/images/s1.jpg" alt="" class="pro-image-back">
-                                    <div class="men-cart-pro">
-                                        <div class="inner-men-cart-pro">
-                                            <a href="single.html" class="link-product-add-cart">Quick View</a>
-                                        </div>
-                                    </div>
-                                    <span class="product-new-top">New</span>
-
-                                </div>
-                                <div class="item-info-product ">
-                                    <h4><a href="single.html">Running Shoes</a></h4>
-                                    <div class="info-product-price">
-                                        <span class="item_price">$80.99</span>
-                                        <del>$89.71</del>
-                                    </div>
-                                    <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-                                        <form action="#" method="post">
-                                            <fieldset>
-                                                <input type="hidden" name="cmd" value="_cart" />
-                                                <input type="hidden" name="add" value="1" />
-                                                <input type="hidden" name="business" value=" " />
-                                                <input type="hidden" name="item_name" value="Running Shoes" />
-                                                <input type="hidden" name="amount" value="30.99" />
-                                                <input type="hidden" name="discount_amount" value="1.00" />
-                                                <input type="hidden" name="currency_code" value="USD" />
-                                                <input type="hidden" name="return" value=" " />
-                                                <input type="hidden" name="cancel_return" value=" " />
-                                                <input type="submit" name="submit" value="Add to cart" class="button" />
-                                            </fieldset>
-                                        </form>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 product-men">
-                            <div class="men-pro-item simpleCart_shelfItem">
-                                <div class="men-thumb-item">
-                                    <img src="~/Content/Client/images/s2.jpg" alt="" class="pro-image-front">
-                                    <img src="~/Content/Client/images/s2.jpg" alt="" class="pro-image-back">
-                                    <div class="men-cart-pro">
-                                        <div class="inner-men-cart-pro">
-                                            <a href="single.html" class="link-product-add-cart">Quick View</a>
-                                        </div>
-                                    </div>
-                                    <span class="product-new-top">New</span>
-
-                                </div>
-                                <div class="item-info-product ">
-                                    <h4><a href="single.html">Shoetopia Lace Up</a></h4>
-                                    <div class="info-product-price">
-                                        <span class="item_price">$90.99</span>
-                                        <del>$59.71</del>
-                                    </div>
-                                    <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-                                        <form action="#" method="post">
-                                            <fieldset>
-                                                <input type="hidden" name="cmd" value="_cart" />
-                                                <input type="hidden" name="add" value="1" />
-                                                <input type="hidden" name="business" value=" " />
-                                                <input type="hidden" name="item_name" value="Shoetopia Lace Up" />
-                                                <input type="hidden" name="amount" value="30.99" />
-                                                <input type="hidden" name="discount_amount" value="1.00" />
-                                                <input type="hidden" name="currency_code" value="USD" />
-                                                <input type="hidden" name="return" value=" " />
-                                                <input type="hidden" name="cancel_return" value=" " />
-                                                <input type="submit" name="submit" value="Add to cart" class="button" />
-                                            </fieldset>
-                                        </form>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 product-men">
-                            <div class="men-pro-item simpleCart_shelfItem">
-                                <div class="men-thumb-item">
-                                    <img src="~/Content/Client/images/s3.jpg" alt="" class="pro-image-front">
-                                    <img src="~/Content/Client/images/s3.jpg" alt="" class="pro-image-back">
-                                    <div class="men-cart-pro">
-                                        <div class="inner-men-cart-pro">
-                                            <a href="single.html" class="link-product-add-cart">Quick View</a>
-                                        </div>
-                                    </div>
-                                    <span class="product-new-top">New</span>
-
-                                </div>
-                                <div class="item-info-product ">
-                                    <h4><a href="single.html">Steemo Casuals(Black)</a></h4>
-                                    <div class="info-product-price">
-                                        <span class="item_price">$90.99</span>
-                                        <del>$59.71</del>
-                                    </div>
-                                    <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-                                        <form action="#" method="post">
-                                            <fieldset>
-                                                <input type="hidden" name="cmd" value="_cart" />
-                                                <input type="hidden" name="add" value="1" />
-                                                <input type="hidden" name="business" value=" " />
-                                                <input type="hidden" name="item_name" value="Steemo Casuals (Black)" />
-                                                <input type="hidden" name="amount" value="30.99" />
-                                                <input type="hidden" name="discount_amount" value="1.00" />
-                                                <input type="hidden" name="currency_code" value="USD" />
-                                                <input type="hidden" name="return" value=" " />
-                                                <input type="hidden" name="cancel_return" value=" " />
-                                                <input type="submit" name="submit" value="Add to cart" class="button" />
-                                            </fieldset>
-                                        </form>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 product-men">
-                            <div class="men-pro-item simpleCart_shelfItem">
-                                <div class="men-thumb-item">
-                                    <img src="~/Content/Client/images/s4.jpg" alt="" class="pro-image-front">
-                                    <img src="~/Content/Client/images/s4.jpg" alt="" class="pro-image-back">
-                                    <div class="men-cart-pro">
-                                        <div class="inner-men-cart-pro">
-                                            <a href="single.html" class="link-product-add-cart">Quick View</a>
-                                        </div>
-                                    </div>
-                                    <span class="product-new-top">New</span>
-
-                                </div>
-                                <div class="item-info-product ">
-                                    <h4><a href="single.html">Benetton Flip Flops</a></h4>
-                                    <div class="info-product-price">
-                                        <span class="item_price">$40.99</span>
-                                        <del>$99.71</del>
-                                    </div>
-                                    <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-                                        <form action="#" method="post">
-                                            <fieldset>
-                                                <input type="hidden" name="cmd" value="_cart" />
-                                                <input type="hidden" name="add" value="1" />
-                                                <input type="hidden" name="business" value=" " />
-                                                <input type="hidden" name="item_name" value="Benetton Flip Flops" />
-                                                <input type="hidden" name="amount" value="30.99" />
-                                                <input type="hidden" name="discount_amount" value="1.00" />
-                                                <input type="hidden" name="currency_code" value="USD" />
-                                                <input type="hidden" name="return" value=" " />
-                                                <input type="hidden" name="cancel_return" value=" " />
-                                                <input type="submit" name="submit" value="Add to cart" class="button" />
-                                            </fieldset>
-                                        </form>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 product-men">
-                            <div class="men-pro-item simpleCart_shelfItem">
-                                <div class="men-thumb-item">
-                                    <img src="~/Content/Client/images/s5.jpg" alt="" class="pro-image-front">
-                                    <img src="~/Content/Client/images/s5.jpg" alt="" class="pro-image-back">
-                                    <div class="men-cart-pro">
-                                        <div class="inner-men-cart-pro">
-                                            <a href="single.html" class="link-product-add-cart">Quick View</a>
-                                        </div>
-                                    </div>
-                                    <span class="product-new-top">New</span>
-
-                                </div>
-                                <div class="item-info-product ">
-                                    <h4><a href="single.html">Moonwalk Bellies </a></h4>
-                                    <div class="info-product-price">
-                                        <span class="item_price">$80.99</span>
-                                        <del>$99.71</del>
-                                    </div>
-                                    <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-                                        <form action="#" method="post">
-                                            <fieldset>
-                                                <input type="hidden" name="cmd" value="_cart" />
-                                                <input type="hidden" name="add" value="1" />
-                                                <input type="hidden" name="business" value=" " />
-                                                <input type="hidden" name="item_name" value="Moonwalk Bellies" />
-                                                <input type="hidden" name="amount" value="30.99" />
-                                                <input type="hidden" name="discount_amount" value="1.00" />
-                                                <input type="hidden" name="currency_code" value="USD" />
-                                                <input type="hidden" name="return" value=" " />
-                                                <input type="hidden" name="cancel_return" value=" " />
-                                                <input type="submit" name="submit" value="Add to cart" class="button" />
-                                            </fieldset>
-                                        </form>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 product-men">
-                            <div class="men-pro-item simpleCart_shelfItem">
-                                <div class="men-thumb-item">
-                                    <img src="~/Content/Client/images/s6.jpg" alt="" class="pro-image-front">
-                                    <img src="~/Content/Client/images/s6.jpg" alt="" class="pro-image-back">
-                                    <div class="men-cart-pro">
-                                        <div class="inner-men-cart-pro">
-                                            <a href="single.html" class="link-product-add-cart">Quick View</a>
-                                        </div>
-                                    </div>
-                                    <span class="product-new-top">New</span>
-
-                                </div>
-                                <div class="item-info-product ">
-                                    <h4><a href="single.html">Aero Canvas Loafers  </a></h4>
-                                    <div class="info-product-price">
-                                        <span class="item_price">$120.99</span>
-                                        <del>$199.71</del>
-                                    </div>
-                                    <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-                                        <form action="#" method="post">
-                                            <fieldset>
-                                                <input type="hidden" name="cmd" value="_cart" />
-                                                <input type="hidden" name="add" value="1" />
-                                                <input type="hidden" name="business" value=" " />
-                                                <input type="hidden" name="item_name" value="Aero Canvas Loafers" />
-                                                <input type="hidden" name="amount" value="30.99" />
-                                                <input type="hidden" name="discount_amount" value="1.00" />
-                                                <input type="hidden" name="currency_code" value="USD" />
-                                                <input type="hidden" name="return" value=" " />
-                                                <input type="hidden" name="cancel_return" value=" " />
-                                                <input type="submit" name="submit" value="Add to cart" class="button" />
-                                            </fieldset>
-                                        </form>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 product-men">
-                            <div class="men-pro-item simpleCart_shelfItem">
-                                <div class="men-thumb-item">
-                                    <img src="~/Content/Client/images/s7.jpg" alt="" class="pro-image-front">
-                                    <img src="~/Content/Client/images/s7.jpg" alt="" class="pro-image-back">
-                                    <div class="men-cart-pro">
-                                        <div class="inner-men-cart-pro">
-                                            <a href="single.html" class="link-product-add-cart">Quick View</a>
-                                        </div>
-                                    </div>
-                                    <span class="product-new-top">New</span>
-
-                                </div>
-                                <div class="item-info-product ">
-                                    <h4><a href="single.html">Sparx Sporty Canvas Shoes</a></h4>
-                                    <div class="info-product-price">
-                                        <span class="item_price">$160.99</span>
-                                        <del>$199.71</del>
-                                    </div>
-                                    <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-                                        <form action="#" method="post">
-                                            <fieldset>
-                                                <input type="hidden" name="cmd" value="_cart" />
-                                                <input type="hidden" name="add" value="1" />
-                                                <input type="hidden" name="business" value=" " />
-                                                <input type="hidden" name="item_name" value="Sparx Sporty Canvas Shoes" />
-                                                <input type="hidden" name="amount" value="30.99" />
-                                                <input type="hidden" name="discount_amount" value="1.00" />
-                                                <input type="hidden" name="currency_code" value="USD" />
-                                                <input type="hidden" name="return" value=" " />
-                                                <input type="hidden" name="cancel_return" value=" " />
-                                                <input type="submit" name="submit" value="Add to cart" class="button" />
-                                            </fieldset>
-                                        </form>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 product-men">
-                            <div class="men-pro-item simpleCart_shelfItem">
-                                <div class="men-thumb-item">
-                                    <img src="~/Content/Client/images/s8.jpg" alt="" class="pro-image-front">
-                                    <img src="~/Content/Client/images/s8.jpg" alt="" class="pro-image-back">
-                                    <div class="men-cart-pro">
-                                        <div class="inner-men-cart-pro">
-                                            <a href="single.html" class="link-product-add-cart">Quick View</a>
-                                        </div>
-                                    </div>
-                                    <span class="product-new-top">New</span>
-
-                                </div>
-                                <div class="item-info-product ">
-                                    <h4><a href="single.html">Women BLACK Heels</a></h4>
-                                    <div class="info-product-price">
-                                        <span class="item_price">$180.99</span>
-                                        <del>$199.71</del>
-                                    </div>
-                                    <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-                                        <form action="#" method="post">
-                                            <fieldset>
-                                                <input type="hidden" name="cmd" value="_cart" />
-                                                <input type="hidden" name="add" value="1" />
-                                                <input type="hidden" name="business" value=" " />
-                                                <input type="hidden" name="item_name" value="Women BLACK Heels" />
-                                                <input type="hidden" name="amount" value="30.99" />
-                                                <input type="hidden" name="discount_amount" value="1.00" />
-                                                <input type="hidden" name="currency_code" value="USD" />
-                                                <input type="hidden" name="return" value=" " />
-                                                <input type="hidden" name="cancel_return" value=" " />
-                                                <input type="submit" name="submit" value="Add to cart" class="button" />
-                                            </fieldset>
-                                        </form>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>*@
+                    <div class="clearfix"></div>
+                </div>
             </div>
         </div>
     </div>
